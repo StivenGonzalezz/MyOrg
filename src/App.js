@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Header from './components/Header/Header.jsx';
+import Formulario from './components/Formulario/Formulario.jsx';
+import MiOrg from './components/MiOrg/index.jsx'
 
 function App() {
+
+  const [mostrarFormulario, setMostrarFormulario] = useState(true)
+
+  const settearFormulario = () =>{
+    setMostrarFormulario(!mostrarFormulario)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      { mostrarFormulario ? <Formulario />  : <></>}
+      {/* { mostrarFormulario && <Formulario />}  se valida lo mismo que arriba pero escrito de una manera diferente  */}
+      
+      <MiOrg settearFormulario={settearFormulario}/>
     </div>
   );
 }
