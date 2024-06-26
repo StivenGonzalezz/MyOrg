@@ -46,7 +46,12 @@ function App() {
   ]
 
   const [mostrarFormulario, setMostrarFormulario] = useState(false)
-  const [colaboradores, setColaboradores] = useState([])
+  const [colaboradores, setColaboradores] = useState([{
+    equipo: "Front End",
+    foto: "https://github.com/harlandlohora.png",
+    nombre: "Harland Lohora",
+    puesto: "Instructor"
+  }])
 
   const settearFormulario = () =>{
     setMostrarFormulario(!mostrarFormulario)
@@ -73,8 +78,8 @@ function App() {
       {
         equipos.map((equipo) => <Equipo 
         datos={equipo} 
-        key={Equipo.titulo}
-        colaboradores={colaboradores}
+        key={equipo.titulo}
+        colaboradores={colaboradores.filter(colaborador => colaborador.equipo === equipo.titulo)}
         /> 
       )
       }

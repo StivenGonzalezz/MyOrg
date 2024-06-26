@@ -5,7 +5,7 @@ const ListaOpciones = (props) =>{
 
     const manejarCambio = (e) =>{
         console.log(e.target.value)
-        props.actualizar()
+        props.actualizar(e.target.value)
     }
 
     return (
