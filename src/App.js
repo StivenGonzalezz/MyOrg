@@ -4,10 +4,14 @@ import Header from './components/Header/Header.jsx';
 import Formulario from './components/Formulario/Formulario.jsx';
 import MiOrg from './components/MiOrg/index.jsx'
 import Equipo from './components/Equipo/index.jsx';
+import Footer from './components/Footer/index.jsx';
 
 function App() {
 
-  const equipos = [
+  
+
+  const [mostrarFormulario, setMostrarFormulario] = useState(false)
+  const [equipos, setEquipos] = useState([
     {
       titulo: "Programacion",
       colorPrimario: "#57C278",
@@ -43,15 +47,19 @@ function App() {
       colorPrimario: "#FF8A29",
       colorSecundario: "#FFEEDF"
     }
-  ]
-
-  const [mostrarFormulario, setMostrarFormulario] = useState(false)
+  ])
   const [colaboradores, setColaboradores] = useState([{
     equipo: "Front End",
-    foto: "https://github.com/harlandlohora.png",
-    nombre: "Harland Lohora",
-    puesto: "Instructor"
-  }])
+    foto: "https://github.com/StivenGonzalezz.png",
+    nombre: "Stiven Gonzalez",
+    puesto: "Desarrolador Web"
+  },
+  {equipo: "UX UI",
+    foto: "https://github.com/Adalinee.png",
+    nombre: "Adaline",
+    puesto: "Designer"
+  }
+  ])
 
   const settearFormulario = () =>{
     setMostrarFormulario(!mostrarFormulario)
@@ -60,6 +68,23 @@ function App() {
   const registrarColaborador = (colaborador) =>{
     console.log("new colbad", colaborador)
     setColaboradores([...colaboradores, colaborador])
+  }
+
+  const eliminarColaborador = () =>{
+    console.log("eliminar")
+  }
+
+  const actualizaColorEquipo = (color, titulo) =>{
+    console.log("Actualizar: ", color, titulo)
+    const equiopsActualizados = equipos.map((equipo) =>{
+      if(equipo.titulo === titulo){
+        equipo.colorPrimario = color
+      }
+      return equipo
+    })
+
+    setEquipos(equiopsActualizados)
+    
   }
 
   return (
@@ -75,14 +100,19 @@ function App() {
       }  
       
       <MiOrg settearFormulario={settearFormulario}/>
+
       {
         equipos.map((equipo) => <Equipo 
         datos={equipo} 
         key={equipo.titulo}
         colaboradores={colaboradores.filter(colaborador => colaborador.equipo === equipo.titulo)}
+        eliminarColaborador = {eliminarColaborador}
+        actualizaColorEquipo={actualizaColorEquipo}
         /> 
       )
       }
+
+      <Footer />
     </div>
   );
 }
